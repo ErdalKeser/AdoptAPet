@@ -21,8 +21,7 @@ An app designed to find a new home for our animal friends.
 
 
 <img src="https://github.com/ErdalKeser/AdoptAPet/assets/117985999/b1924287-1f74-46ad-b09b-8d7dcea5a9af.png" alt="Screenshot 1" style="width:200px; height:500px;">
-
-
-
+<img src="https://github.com/ErdalKeser/AdoptAPet/assets/117985999/01ddaf1b-b0c4-49f8-bfd0-2271aedb5123.png" alt="Screenshot 1" style="width:200px; height:500px;">
+<img src="https://github.com/ErdalKeser/AdoptAPet/assets/117985999/a293a0c9-1d48-44fa-b89e-b50b1ab15380.png" alt="Screenshot 1" style="width:200px; height:500px;">
 
 
