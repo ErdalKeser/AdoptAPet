@@ -1,8 +1,9 @@
 # AdoptAPet
-
+An app designed to find a new home for our animal friends.
 
 # Technology
-
+- UIKit
+- Fully Programmatic
 - MVVM
 - Firebase
 - JGProgressHUD
@@ -10,9 +11,6 @@
 - YPImagePicker
 
 
-
-
-# EntryController
 <h1>EntryController</h1>
 
 <img src="https://github.com/ErdalKeser/AdoptAPet/assets/117985999/060b0fe9-c180-4467-a791-c8330c34540c.png" alt="Screenshot 1" style="width:200px; height:500px;">
