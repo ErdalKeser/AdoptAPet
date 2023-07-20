@@ -24,12 +24,10 @@ An app designed to find a new home for our animal friends.
 <img src="https://github.com/ErdalKeser/AdoptAPet/assets/117985999/354e008a-84cf-48b3-a46b-5afcfd7e2266.png" alt="Screenshot 1" style="width:200px; height:500px;">
 <img src="https://github.com/ErdalKeser/AdoptAPet/assets/117985999/6c699b74-8723-410e-94a5-745b9fc46599.png" alt="Screenshot 1" style="width:200px; height:500px;">
 
-<h1>UploadController</h1>
+<h1>ProfileController</h1>
 
-<img src="https://github.com/ErdalKeser/AdoptAPet/assets/117985999/0d14758c-554c-4d38-a851-7e6f03e2496e.png" alt="Screenshot 1" style="width:200px; height:500px;">
-<img src="https://github.com/ErdalKeser/AdoptAPet/assets/117985999/487d2d01-9d60-4281-9273-6d9a0e5b96da.png" alt="Screenshot 1" style="width:200px; height:500px;">
-<img src="https://github.com/ErdalKeser/AdoptAPet/assets/117985999/16d3a0d0-4fd7-4558-88f3-653b37142986.png" alt="Screenshot 1" style="width:200px; height:500px;">
-
+<img src="https://github.com/ErdalKeser/AdoptAPet/assets/117985999/59b693e8-4684-4a78-8002-3f65f5c642e8.png" alt="Screenshot 1" style="width:200px; height:500px;">
+<img src="https://github.com/ErdalKeser/AdoptAPet/assets/117985999/d81d72ea-c370-4f05-811e-69c168d6e66b.png" alt="Screenshot 1" style="width:200px; height:500px;">
 
 
 
