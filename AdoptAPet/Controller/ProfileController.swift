@@ -10,8 +10,16 @@ import Firebase
 
 private let cellIdentifer = "ProfileCell"
 
+protocol ProfileControllerProtocol: AnyObject{
+    
+    func sendPost(post:[Post])
+    func sendUser(user:User)
+}
+
 
 class ProfileController: UIViewController,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+    
+    private let profileVM = ProfileVM()
     
     var posts = [Post]() {
         
@@ -111,15 +119,16 @@ class ProfileController: UIViewController,UICollectionViewDataSource, UICollecti
         super.viewDidLoad()
         
         view.backgroundColor = .white
-        fetchPosts()
         setupCollectionView()
         configureUI()
         divider()
-        fetchUser()
+        profileVM.delegate = self
+        profileVM.fetchPost()
+        profileVM.fetchUser()
         
     }
     override func viewWillAppear(_ animated: Bool) {
-        fetchPosts()
+        profileVM.fetchPost()
     }
     
     func divider(){
@@ -131,7 +140,6 @@ class ProfileController: UIViewController,UICollectionViewDataSource, UICollecti
         centerDivider.backgroundColor = .black
         bottomDivider.backgroundColor = .black
  
-        
     }
     private func setupCollectionView() {
         let layout = UICollectionViewFlowLayout()
@@ -177,34 +185,7 @@ class ProfileController: UIViewController,UICollectionViewDataSource, UICollecti
         
     }
     
-    func fetchPosts(){
-        
-            guard let uid = Auth.auth().currentUser?.uid else {return}
-            let query = COLLECTİON_ALL.whereField("ownerUid", isEqualTo: uid)
-                        query.getDocuments { snapshot, error in
-                guard let documents = snapshot?.documents else {return}
-                
-                var post = documents.map({Post(dictionary: $0.data())})
-                
-                post.sort(by: { $0.timestamp.seconds > $1.timestamp.seconds })
-                self.posts = post
-            }
-        }
-    
-    func fetchUser(){
-        
-            guard let uid = Auth.auth().currentUser?.uid else {return}
-            let query = COLLECTİON_ALL.whereField("ownerUid", isEqualTo: uid)
-            
-        COLLECTION_USERS.document(uid).getDocument { snapshot, error in
-            
-            guard let dictionary = snapshot?.data() else { return }
-            self.user = User(dictionary: dictionary)
-            
-        }
-            
-        }
-    
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return posts.count
     }
@@ -251,6 +232,19 @@ extension ProfileController{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: view.frame.width, height: 20)
     }
+    
+}
+extension ProfileController: ProfileControllerProtocol {
+   
+    func sendUser(user: User) {
+        self.user = user
+     
+    }
+    
+    func sendPost(post: [Post]) {
+        self.posts = post
+    }
+    
     
 }
 

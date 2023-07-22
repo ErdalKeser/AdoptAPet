@@ -272,15 +272,8 @@ extension UploadPostController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     @objc func textDidChange(sender: UIButton){
         if sender == genusButton {
-            print("erdal")
         }else {
-           print("galatasary")
         }
     }
-    
-    
-    
-    
-    
     
 }

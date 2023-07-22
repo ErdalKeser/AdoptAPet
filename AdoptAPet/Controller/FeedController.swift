@@ -7,9 +7,17 @@
 
 import UIKit
 import Firebase
+
 private let reuseIdentifier = "Cell"
 
+protocol FeedControllerProtocol: AnyObject{
+    
+    func sendPost(post:[Post])
+}
+
 class FeedController: UICollectionViewController, UINavigationControllerDelegate, UIAdaptivePresentationControllerDelegate {
+    
+    private let feedVM = FeedVM()
     
     private var posts = [Post]() {
         didSet {
@@ -17,6 +25,7 @@ class FeedController: UICollectionViewController, UINavigationControllerDelegate
             if posts.isEmpty == false {
                 let indexPath = IndexPath(row: 0, section: 0)
                 collectionView.scrollToItem(at: indexPath, at: .top, animated: true)
+                
             }
         }
     }
@@ -32,24 +41,16 @@ class FeedController: UICollectionViewController, UINavigationControllerDelegate
         super.viewDidLoad()
         view.backgroundColor = .white
         navigationController?.navigationBar.prefersLargeTitles = true
-        
+        feedVM.delegate = self
         configureUI()
-        fetchPostsAll()
+        self.feedVM.fetchPosts(genus: "All", city: "Turkey")
     }
     override func viewWillAppear(_ animated: Bool) {
-        fetchPostsAll()
+        self.feedVM.fetchPosts(genus: "All", city: "Turkey")
         navigationItem.title = "All in Turkey"
     }
 
-    func fetchPosts(genus:String,city:String){
-        PostService.fetchFeedPosts(genus: genus, city: city) { post in
-            
-                self.posts = post
-            if post.isEmpty == true {
-                self.showMessage()
-            }
-        }
-    }
+
     func showMessage(){
 
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
@@ -60,8 +61,9 @@ class FeedController: UICollectionViewController, UINavigationControllerDelegate
             
             let message = NSAttributedString(string: "Dont have a feed..", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15)])
             alertController.setValue(message, forKey: "attributedMessage")
+        
             let action = UIAlertAction(title: "OK", style: .default) { (_) in
-                self.fetchPostsAll()
+                self.feedVM.fetchPosts(genus: "All", city: "Turkey")
                 self.navigationItem.title = "All in Turkey"
             }
             action.setValue(UIColor.white, forKey: "titleTextColor")
@@ -69,13 +71,6 @@ class FeedController: UICollectionViewController, UINavigationControllerDelegate
             present(alertController, animated: true, completion: nil)
     }
     
-    func fetchPostsAll(){
-        COLLECTİON_ALL.order(by: "timestamp",descending: true).getDocuments { snapshot, error in
-            guard let document = snapshot?.documents else {return}
-            let posts = document.map ({Post(dictionary: $0.data())})
-            self.posts = posts
-    }
-    }
         
     func configureUI(){
         
@@ -157,13 +152,14 @@ extension FeedController: incomingData {
     func data(genus: String, city: String) {
         print("cins: \(genus) \(city)")
         
-            fetchPosts(genus: genus, city: city)
+        feedVM.fetchPosts(genus: genus, city: city)
         
         navigationItem.title = "\(genus) in \(city)"
     }
     
 }
 extension FeedController: FeedCellDelegate {
+    
     func explain(explain: String) {
         let controller = ExplainController()
         controller.explain = explain
@@ -175,4 +171,15 @@ extension FeedController: FeedCellDelegate {
     }
    
 }
+extension FeedController: FeedControllerProtocol {
+    func sendPost(post: [Post]) {
+        posts = post
+        if post.isEmpty == true {
+            self.showMessage()
+        }
+        
+    }
+    
+}
+
 
