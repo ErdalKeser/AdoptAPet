@@ -44,6 +44,7 @@ class ExplainController: UIViewController {
         setupDismissGesture()
         view.backgroundColor = .black.withAlphaComponent(0.9)
         configureLabel()
+        print("")
        
     }
     func configureLabel(){
