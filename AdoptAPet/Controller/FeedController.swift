@@ -110,6 +110,7 @@ extension FeedController {
         if let post = post {
             cell.viewModel = PostViewModel(post: post)
             navigationItem.title = "My Post"
+            print("")
 
             
         }else {
