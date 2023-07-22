@@ -25,16 +25,9 @@ class ProfileVM {
             post.sort(by: { $0.timestamp.seconds > $1.timestamp.seconds })
             
             self.delegate?.sendPost(post: post)
-//            self.posts = post
         }
         
-       
-        
-//        PostService.fetchFeedPosts(genus: genus, city: city) { post in
-//
-//            self.delegate?.sendType(post: post)
-//        }
-        
+  
     }
     func fetchUser(){
         
